@@ -13,6 +13,7 @@ public class SmoothLookAtTarget2D : MonoBehaviour
             Quaternion newRot = Quaternion.Euler(new Vector3(0.0f, 0.0f, rotZ + adjustmentAngle));
             transform.rotation = Quaternion.Lerp(transform.rotation, newRot, Time.deltaTime * smoothing);
         }
+
     }
 
     public void SetTarget(Transform newTarget)

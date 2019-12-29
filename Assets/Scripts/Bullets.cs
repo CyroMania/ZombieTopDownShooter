@@ -5,7 +5,7 @@ public class Bullets : MonoBehaviour
     public int damage = 1;
     private void Start()
     {
-        GetComponent<Rigidbody2D>().AddForce(transform.up * moveSpeed);
+        GetComponent<Rigidbody2D>().AddForce(transform.right * moveSpeed);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5872664862593458810}
   - component: {fileID: 428262997050116391}
   m_Layer: 8
-  m_Name: bullet
+  m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,3 +144,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 500
   damage: 1
+  rb: {fileID: 5872664862593458810}
