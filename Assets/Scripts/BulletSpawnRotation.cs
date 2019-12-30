@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BulletSpawnRotation : MonoBehaviour
 {
-    public GameObject Parent;
     public Camera theCamera;
     public float adjustmentAngle = 0.0f;
     void Update()

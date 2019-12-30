@@ -31,7 +31,7 @@ public class WeaponFacing : MonoBehaviour
             else if (difference.x > difference.y && difference.y > 0)
             {
                 Anim.Play("Weapon_Pistol_BackwardRight");
-                Vector3 MoveBehind = new Vector3(Parent.transform.position.x, Parent.transform.position.y, 0f);
+                Vector3 MoveBehind = new Vector3(Parent.transform.position.x, Parent.transform.position.y, 1f);
                 transform.position = MoveBehind;
             }
             else if (difference.y * -1 > difference.x && difference.y > 0)
@@ -52,7 +52,5 @@ public class WeaponFacing : MonoBehaviour
             {
                 Anim.Play("Weapon_Pistol_Forward");
             }
-
-        Debug.Log(transform.position);
     }
 }
