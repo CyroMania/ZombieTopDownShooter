@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WaveSystem : MonoBehaviour
 {
     public enum SpawnState { Spawning, Waiting, Counting };
+    public UnityEvent OnWaveComplete;
 
     [System.Serializable]
     public class Wave
@@ -16,13 +18,12 @@ public class WaveSystem : MonoBehaviour
     }
 
     public Transform[] SpawnPoints;
-
     public Wave[] Waves;
 
 
     private int NextWave = 0;
     public float timeBetweenWaves = 5f;
-    private float waveCountdown;
+    public float waveCountdown;
 
     private float searchCountdown = 1f;
 
@@ -63,6 +64,7 @@ public class WaveSystem : MonoBehaviour
 
     void WaveCompleted()
     {
+        OnWaveComplete.Invoke();
         State = SpawnState.Counting;
         waveCountdown = timeBetweenWaves;
 
@@ -109,8 +111,7 @@ public class WaveSystem : MonoBehaviour
 
     void SpawnEnemy(Transform _enemy)
     {
-        Debug.Log("Instantiate Enemy: " + _enemy.name);
-        Transform _sp = SpawnPoints[Random.Range(0, SpawnPoints.Length - 1)];
+        Transform _sp = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
         Instantiate(_enemy, _sp.position, _sp.rotation);
     }
 }

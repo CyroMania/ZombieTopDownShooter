@@ -1,32 +1,36 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 public class GameUI : MonoBehaviour
 {
     public Slider healthBar;
     public Text scoreText;
     public TextMeshProUGUI waveText;
     public int playerScore = 0;
+    public float fadeSpeed = 1;
     private TimerEvent Timer;
     private int Wave = 0;
     private void Start()
     {
         NewWave();
-        
     }
 
     public void NewWave()
     {
-        waveText.SetText("Wave " + Wave);
-        waveText.color = new Color(waveText.color.r, waveText.color.g, waveText.color.b, 255);
-        waveText.CrossFadeAlpha(0, 1, true);
+        Debug.Log("New Wave For Text!!");
         Wave++;
+        waveText.SetText("WAVE " + Wave);
+        StartCoroutine(TextFadeInOut(waveText, fadeSpeed));
+
+
+
+
     }
     private void OnEnable()
     {
         Player.OnUpdateHealth += UpdateHealthBar;
         AddScore.OnSendScore += UpdateScore;
-        NewWave();
     }
     private void OnDisable()
     {
@@ -41,5 +45,24 @@ public class GameUI : MonoBehaviour
     {
         playerScore += theScore;
         scoreText.text = "SCORE: " + playerScore.ToString();
+    }
+
+    IEnumerator TextFadeInOut(TextMeshProUGUI TextToFade, float FadeSpeed)
+    {
+
+        while (TextToFade.color.a < 1f)
+        {
+            TextToFade.color = new Color(TextToFade.color.r, TextToFade.color.g, TextToFade.color.b, TextToFade.color.a + (Time.deltaTime) * fadeSpeed);
+            yield return new WaitForSeconds(0.01f);
+        }
+
+
+        while (TextToFade.color.a > 0.01f)
+        {
+            TextToFade.color = new Color(TextToFade.color.r, TextToFade.color.g, TextToFade.color.b, TextToFade.color.a - (Time.deltaTime) * fadeSpeed);
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        yield break;
     }
 }
