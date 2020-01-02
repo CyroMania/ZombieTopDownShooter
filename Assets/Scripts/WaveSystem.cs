@@ -65,6 +65,8 @@ public class WaveSystem : MonoBehaviour
     void WaveCompleted()
     {
         OnWaveComplete.Invoke();
+
+
         State = SpawnState.Counting;
         waveCountdown = timeBetweenWaves;
 

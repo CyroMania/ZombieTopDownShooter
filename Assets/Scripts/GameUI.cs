@@ -10,7 +10,7 @@ public class GameUI : MonoBehaviour
     public int playerScore = 0;
     public float fadeSpeed = 1;
     private TimerEvent Timer;
-    private int Wave = 0;
+    public int Wave = 0;
     private void Start()
     {
         NewWave();
@@ -18,13 +18,11 @@ public class GameUI : MonoBehaviour
 
     public void NewWave()
     {
-        Debug.Log("New Wave For Text!!");
+
+        PlayerPrefs.SetInt("Wave", Wave);
         Wave++;
         waveText.SetText("WAVE " + Wave);
         StartCoroutine(TextFadeInOut(waveText, fadeSpeed));
-
-
-
 
     }
     private void OnEnable()
