@@ -8,6 +8,7 @@ public class HurtTrigger : MonoBehaviour
         collision.transform.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
         GetComponent<Collider2D>().enabled = false;
         Invoke("ResetTrigger", resetTime);
+        gameObject.SendMessageUpwards("InContact", true);
     }
     private void ResetTrigger()
     {

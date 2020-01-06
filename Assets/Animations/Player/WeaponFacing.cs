@@ -8,8 +8,10 @@ public class WeaponFacing : MonoBehaviour
     public Camera theCamera;
     public GameObject Parent;
     private bool Firing;
+    Vector3 MoveInfront;
+    Vector3 MoveBehind;
 
-    private Vector3 MoveBehind = new Vector3(0f, 0f, 0f);
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,38 +21,69 @@ public class WeaponFacing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Firing = Anim.GetBool("isFiring");
+
+        float InputX = Input.GetAxis("Horizontal");
+        float InputY = Input.GetAxis("Vertical");
+        float Fire = Input.GetAxis("Fire1");
+
+        if (Fire > 0f)
+        {
+            Anim.SetBool("isFiring", true);
+        }
+        else
+        {
+            Anim.SetBool("isFiring", false);
+        }
+
+
         Vector3 target = theCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector3 difference = target - transform.position;
-            if (difference.x < difference.y && difference.y * -1 < difference.x)
-            {
-                Anim.Play("Weapon_Pistol_Backward");
-                Vector3 MoveInfront = new Vector3(Parent.transform.position.x, Parent.transform.position.y, -1f);
-                transform.position = MoveInfront;
-            }
-            else if (difference.x > difference.y && difference.y > 0)
-            {
-                Anim.Play("Weapon_Pistol_BackwardRight");
-                Vector3 MoveBehind = new Vector3(Parent.transform.position.x, Parent.transform.position.y, 1f);
-                transform.position = MoveBehind;
-            }
-            else if (difference.y * -1 > difference.x && difference.y > 0)
-            {
-                Anim.Play("Weapon_Pistol_BackwardLeft");
-            }
-            else if (difference.x > -1 * difference.y)
-            {
-                Anim.Play("Weapon_Pistol_ForwardRight");
-                Vector3 MoveInfront = new Vector3(Parent.transform.position.x, Parent.transform.position.y, -1f);
-                transform.position = MoveInfront;
-            }
-            else if (difference.x < difference.y)
-            {
-                Anim.Play("Weapon_Pistol_ForwardLeft");
-            }
-            else
-            {
-                Anim.Play("Weapon_Pistol_Forward");
-            }
+        if (difference.x < difference.y && difference.y * -1 < difference.x)
+        {
+            Anim.SetBool("facingLeft", false);
+            Anim.SetBool("facingRight", false);
+            Anim.SetBool("facingForward", false);
+        }
+        else if (difference.x > difference.y && difference.y > 0)
+        {
+            MoveBehind = new Vector3(Parent.transform.position.x, Parent.transform.position.y, -0.5f);
+            transform.position = MoveBehind;
+            Anim.SetBool("facingLeft", false);
+            Anim.SetBool("facingRight", true);
+            Anim.SetBool("facingForward", false);
+        }
+        else if(difference.y * -1 > difference.x && difference.y > 0)
+        {
+            MoveBehind = new Vector3(Parent.transform.position.x, Parent.transform.position.y, -0.5f);
+            transform.position = MoveBehind;
+            Anim.SetBool("facingLeft", true);
+            Anim.SetBool("facingRight", false);
+            Anim.SetBool("facingForward", false);
+        }
+        else if (difference.x > -1 * difference.y)
+        {
+            MoveInfront = new Vector3(Parent.transform.position.x, Parent.transform.position.y, -1.5f);
+            transform.position = MoveInfront;
+            Anim.SetBool("facingLeft", false);
+            Anim.SetBool("facingRight", true);
+            Anim.SetBool("facingForward", true);
+        }
+        else if (difference.x < difference.y)
+        {
+            MoveInfront = new Vector3(Parent.transform.position.x, Parent.transform.position.y, -1.5f);
+            transform.position = MoveInfront;
+            Anim.SetBool("facingLeft", true);
+            Anim.SetBool("facingRight", false);
+            Anim.SetBool("facingForward", true);
+        }
+        else
+        {
+            Anim.SetBool("facingLeft", false);
+            Anim.SetBool("facingRight", false);
+            Anim.SetBool("facingForward", true);
+        }
+
+
+
     }
 }

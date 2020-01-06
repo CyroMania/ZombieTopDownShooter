@@ -13,7 +13,9 @@ public class HealthSystem : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        PlayerPrefs.SetInt("PlayerHealth", health);
         onDamaged.Invoke(health);
+
         if (health < 1)
         {
             onDie.Invoke();
@@ -22,7 +24,6 @@ public class HealthSystem : MonoBehaviour
 
     public void GameOver()
     {
-        DontDestroyOnLoad(GameObject.Find("Player"));
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

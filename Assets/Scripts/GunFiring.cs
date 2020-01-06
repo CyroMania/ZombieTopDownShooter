@@ -5,6 +5,8 @@ using UnityEngine;
 public class GunFiring : MonoBehaviour
 {
     private Animator gunAnim;
+    public int maxAmmo = 10;
+
 
 
     private void Start()

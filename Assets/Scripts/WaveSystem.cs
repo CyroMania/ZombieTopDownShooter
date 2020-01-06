@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class WaveSystem : MonoBehaviour
 {
+
+    public int LoopMulitplier = 1;
     public enum SpawnState { Spawning, Waiting, Counting };
     public UnityEvent OnWaveComplete;
 
@@ -73,6 +75,7 @@ public class WaveSystem : MonoBehaviour
         if (NextWave + 1 > Waves.Length - 1)
         {
             Debug.Log("All Waves Completed! Loop Time");
+            LoopMulitplier++;
             NextWave = 0;
         }
         else
@@ -86,7 +89,7 @@ public class WaveSystem : MonoBehaviour
     {
         State = SpawnState.Spawning;
 
-        for (int i = 0; i < _wave.count; i++)
+        for (int i = 0; i < _wave.count * LoopMulitplier; i++)
         {
             SpawnEnemy(_wave.enemy);
             yield return new WaitForSeconds(_wave.delay);
