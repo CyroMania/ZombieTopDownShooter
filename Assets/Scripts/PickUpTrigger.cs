@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PickUpTrigger : MonoBehaviour
 {
-    private GameObject WeaponShotgun;
+    public GameObject Weapon;
     private void Start()
     {
 
@@ -17,10 +17,10 @@ public class PickUpTrigger : MonoBehaviour
 
     public void ShotgunAmmo()
     {
-        WeaponShotgun = GameObject.Find("Shotgun");
-        var Shotgun = WeaponShotgun.GetComponent("Weapon");
-        Debug.Log("Shotgun Ammo Gained");
-        Shotgun.SendMessage("GainAmmo", 10);
+        Debug.Log("Shotgun Ammo Picked Up");
+        //var WeaponScript = ;
+        //WeaponScript;
+        Weapon.SendMessage("IncreaseShotgunAmmo", 6);
     }
 
     public void PistolAmmo()

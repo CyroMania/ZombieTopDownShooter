@@ -59,6 +59,19 @@ public class PickUp : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (gameObject.name.Contains("ShotgunBullet"))
+        {
+            try
+            {
+                var ShotgunWeaponScript = GameObject.Find("Shotgun").GetComponent("Weapon");
+                GameObject Shotgun = GameObject.Find("Shotgun");
+                ShotgunWeaponScript.SendMessage("IncreaseRemainingAmmo", 6);
+            }
+            catch
+            {
+
+            }
+        }
         OnPickUp.Invoke();
     }
 }

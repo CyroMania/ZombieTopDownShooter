@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 public class Spawner : MonoBehaviour
 {
-    public int SpawnChance = 1;
+    public float SpawnRate = 0.1f;
+
     private int Result;
 
     public GameObject prefabToSpawn;
     public float adjustmentAngle = 0;
     public void Spawn()
     {
-        Result = Random.Range(1, SpawnChance);
+        float SpawnChance = (1 / SpawnRate);
+        Result = Mathf.RoundToInt(Random.Range(1, SpawnChance));
         if (Result == 1)
         {
             Vector3 rotationInDegrees = transform.eulerAngles;

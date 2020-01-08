@@ -1,24 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Events;
-public class Weapon : MonoBehaviour
+public class Pistol : MonoBehaviour
 {
     public UnityEvent OnReload;
     public UnityEvent EndReload;
-
-    public AudioSource CantReload;
-    public AudioSource Reloading;
 
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
     public GameObject Parent;
 
     public int maxMagazineAmmo = 10;
-    public int RemainingAmmo = 30;
+    private int RemainingAmmo = 30;
     public int currentMagazineAmmo;
     public float ReloadTime = 3f;
 
-    public bool UnlimitedAmmo = false;
+    public bool UnlimitedAmmo = true;
     public float fireTime = 0.3f;
     private bool isFiring = false;
     private bool isReloading = false;
@@ -59,7 +56,7 @@ public class Weapon : MonoBehaviour
             {
                 canReload = true;
             }
-            
+
             if (currentMagazineAmmo > 0)
             {
                 if (!isReloading)
@@ -76,18 +73,14 @@ public class Weapon : MonoBehaviour
                 {
                     if (!isReloading)
                     {
-                        if (currentMagazineAmmo != maxMagazineAmmo)
-                        {
-                            StartCoroutine(Reload());
-                            isReloading = true;
-                            return;
-                        }
+                        StartCoroutine(Reload());
+                        isReloading = true;
+                        return;
                     }
-
                 }
                 else
                 {
-                    CantReload.Play();
+                    Debug.Log("Can't Reload");
                 }
             }
         }
@@ -107,23 +100,19 @@ public class Weapon : MonoBehaviour
             {
                 if (!isReloading)
                 {
-                    if (currentMagazineAmmo != maxMagazineAmmo)
-                    {
-                        StartCoroutine(Reload());
-                        isReloading = true;
-                        return;
-                    }
+                    StartCoroutine(Reload());
+                    isReloading = true;
+                    return;
                 }
             }
         }
     }
 
-    
+
 
     IEnumerator Reload()
     {
         OnReload.Invoke();
-        Reloading.Play();
         Debug.Log("Reloading...");
 
         yield return new WaitForSeconds(ReloadTime);
@@ -173,8 +162,8 @@ public class Weapon : MonoBehaviour
     public void IncreaseRemainingAmmo(int AmmoGained)
     {
 
-            Debug.Log("Ammo has been gained");
-            RemainingAmmo += AmmoGained;
+        Debug.Log("Ammo has been gained");
+        RemainingAmmo += AmmoGained;
 
     }
 

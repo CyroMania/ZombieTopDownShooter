@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponSwitching : MonoBehaviour
 {
     public int selectedWeapon = 0;
-
+    private bool isReloading = false;
 
     void Start()
     {
@@ -15,29 +15,42 @@ public class WeaponSwitching : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         int PreviousSelectedWeapon = selectedWeapon;
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
-            if (selectedWeapon >= transform.childCount - 1)
+            if (!isReloading)
             {
-                selectedWeapon = 0;
+                if (selectedWeapon >= transform.childCount - 1)
+                {
+                    selectedWeapon = 0;
+                }
+                else
+                {
+                    selectedWeapon++;
+                }
             }
             else
             {
-                selectedWeapon++;
+                Debug.Log("Yo ar reload");
             }
         }
         if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
-            if (selectedWeapon <= 0)
+            if (!isReloading)
             {
-                selectedWeapon = transform.childCount - 1;
+                if (selectedWeapon <= 0)
+                {
+                    selectedWeapon = transform.childCount - 1;
+                }
+                else
+                {
+                    selectedWeapon--;
+                }
             }
             else
             {
-                selectedWeapon--;
+                Debug.Log("Yo ar reload");
             }
         }
 
@@ -45,6 +58,7 @@ public class WeaponSwitching : MonoBehaviour
         {
             SelectWeapon();
         }
+
 
     }
 
@@ -63,5 +77,10 @@ public class WeaponSwitching : MonoBehaviour
             }
             i++;
         }
+    }
+
+    public void IsReloading(bool state)
+    {
+        isReloading = state;
     }
 }
