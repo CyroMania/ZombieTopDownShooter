@@ -5,15 +5,23 @@ using UnityEngine.SceneManagement;
 public class OnDamagedEvent : UnityEvent<int> { }
 public class HealthSystem : MonoBehaviour
 {
-    public int health = 10;
+    public int health = 100;
     public UnityEvent onDie;
     public OnDamagedEvent onDamaged;
 
+    private void Start()
+    {
+        PlayerPrefs.SetInt("PlayerHealth", 100);
+    }
 
     public void TakeDamage(int damage)
     {
         health -= damage;
-        PlayerPrefs.SetInt("PlayerHealth", health);
+
+        if (gameObject.CompareTag("Player"))
+        {
+            PlayerPrefs.SetInt("PlayerHealth", health);
+        }
         onDamaged.Invoke(health);
 
         if (health < 1)

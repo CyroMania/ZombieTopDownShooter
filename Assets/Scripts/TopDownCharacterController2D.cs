@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TopDownCharacterController2D : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class TopDownCharacterController2D : MonoBehaviour
 
     private bool cantRun = false;
     private float runningSpeed;
+
+    public Image EnergyBar;
 
     Rigidbody2D rb;
 
@@ -55,12 +58,17 @@ public class TopDownCharacterController2D : MonoBehaviour
                 energy += Time.deltaTime;
             }
         }
+
+        EnergyBar.fillAmount = (energy / maxEnergy);
     }
 
     IEnumerator Exhausted()
     {
         Debug.Log("Exhausted...");
-        yield return new WaitForSeconds(5f);
+        while (energy < maxEnergy)
+        {
+            yield return new WaitForSeconds(0.01f);
+        }
         cantRun = false;
     }
 

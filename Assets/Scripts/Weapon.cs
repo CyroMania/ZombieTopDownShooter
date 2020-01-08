@@ -123,4 +123,12 @@ public class Weapon : MonoBehaviour
         RemainingAmmo += AmmoGained;
     }
 
+    private void OnEnable()
+    {
+        if (gameObject.name == "Shotgun")
+        {
+            RemainingAmmo = Ammunitio
+        }
+    }
+
 }
