@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PickUpTrigger : MonoBehaviour
 {
     public GameObject Weapon;
+    public UnityEvent ShotgunAmmoPickUp;
     private void Start()
     {
 
@@ -12,15 +14,17 @@ public class PickUpTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.name.Contains("ShotgunBullet"))
+        {
+            ShotgunAmmo();
+        }
         Destroy(collision.gameObject);
+
     }
 
     public void ShotgunAmmo()
     {
-        Debug.Log("Shotgun Ammo Picked Up");
-        //var WeaponScript = ;
-        //WeaponScript;
-        Weapon.SendMessage("IncreaseShotgunAmmo", 6);
+        ShotgunAmmoPickUp.Invoke();
     }
 
     public void PistolAmmo()

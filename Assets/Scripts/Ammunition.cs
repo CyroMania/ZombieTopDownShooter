@@ -18,6 +18,7 @@ public class Ammunition : MonoBehaviour
 
     public void IncreaseShotgunAmmo(int inBullets)
     {
+        Debug.Log("Ammunition Values Updated");
         ShotgunAmmo += inBullets;
     }
 }

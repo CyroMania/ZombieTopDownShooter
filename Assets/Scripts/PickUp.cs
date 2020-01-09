@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class PickUp : MonoBehaviour
 {
-    public UnityEvent OnPickUp;
+    //public UnityEvent OnPickUp;
 
     private Transform tr;
     public float scaleMultiplier = 3f;
@@ -57,21 +57,23 @@ public class PickUp : MonoBehaviour
     }
 
 
-    private void OnDestroy()
-    {
-        if (gameObject.name.Contains("ShotgunBullet"))
-        {
-            try
-            {
-                var ShotgunWeaponScript = GameObject.Find("Shotgun").GetComponent("Weapon");
-                GameObject Shotgun = GameObject.Find("Shotgun");
-                ShotgunWeaponScript.SendMessage("IncreaseRemainingAmmo", 6);
-            }
-            catch
-            {
-
-            }
-        }
-        OnPickUp.Invoke();
-    }
+  //  private void OnDestroy()
+  //  {
+     //   if (gameObject.name.Contains("ShotgunBullet"))
+     //   {
+     //       try
+      //      {
+     //           var ShotgunWeaponScript = GameObject.Find("Shotgun").GetComponent("Weapon");
+     //           ShotgunWeaponScript.SendMessage("IncreaseRemainingAmmo", 6);
+     //           Debug.Log("Shotgun equipped, increased remaining ammo");
+     //       }
+     //       catch
+     //       {
+     //           var WeaponAmmuntionScript = GameObject.Find("Weapon").GetComponent("Weapon");
+     //           WeaponAmmuntionScript.SendMessage("IncreaseShotgunAmmo", 6);
+     //           Debug.Log("Shotgun not equipped, increased ammunition ammo");
+    //        }
+    //    }
+        //OnPickUp.Invoke();
+   //}
 }

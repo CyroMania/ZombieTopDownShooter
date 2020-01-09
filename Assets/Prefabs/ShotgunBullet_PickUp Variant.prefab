@@ -15,7 +15,7 @@ MonoBehaviour:
   OnPickUp:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5479475811948991294, guid: 9a0666c8325609d43818df8229199299,
+      - m_Target: {fileID: 1669328329199106968, guid: 9a0666c8325609d43818df8229199299,
           type: 3}
         m_MethodName: ShotgunAmmo
         m_Mode: 1

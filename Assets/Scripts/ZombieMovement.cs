@@ -116,7 +116,6 @@ public class ZombieMovement : MonoBehaviour
 
     public void SetBoolHasDied(bool state)
     {
-        Debug.Log("died");
         isDead = state;
     }
 }

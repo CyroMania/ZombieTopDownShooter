@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Events;
+using UnityEngine.UI;
 public class Weapon : MonoBehaviour
 {
     public UnityEvent OnReload;
@@ -8,6 +9,8 @@ public class Weapon : MonoBehaviour
 
     public AudioSource CantReload;
     public AudioSource Reloading;
+
+    public Image ReloadBar;
 
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
@@ -49,6 +52,7 @@ public class Weapon : MonoBehaviour
     }
     private void Update()
     {
+
         if (Input.GetMouseButton(0))
         {
             if (RemainingAmmo == 0)
@@ -115,6 +119,10 @@ public class Weapon : MonoBehaviour
                     }
                 }
             }
+            else
+            {
+                CantReload.Play();
+            }
         }
     }
 
@@ -122,11 +130,17 @@ public class Weapon : MonoBehaviour
 
     IEnumerator Reload()
     {
+        float TimeReloaded = 0f;
         OnReload.Invoke();
         Reloading.Play();
         Debug.Log("Reloading...");
 
-        yield return new WaitForSeconds(ReloadTime);
+        while (TimeReloaded < ReloadTime)
+        {
+            yield return new WaitForSeconds(0.01f);
+            TimeReloaded += 0.01f;
+            ReloadBar.fillAmount = TimeReloaded / ReloadTime;
+        }
 
         if (!UnlimitedAmmo)
         {
@@ -148,6 +162,8 @@ public class Weapon : MonoBehaviour
         }
         EndReload.Invoke();
         isReloading = false;
+
+        yield break;
     }
 
 
@@ -165,17 +181,13 @@ public class Weapon : MonoBehaviour
     {
         if (gameObject.name == "Shotgun")
         {
-            var ParentWeaponScript = Parent.GetComponent("Ammunition");
-            ParentWeaponScript.SendMessage("SetShotgunAmmo", RemainingAmmo);
+            Parent.SendMessage("SetShotgunAmmo", RemainingAmmo);
         }
     }
 
     public void IncreaseRemainingAmmo(int AmmoGained)
     {
-
-            Debug.Log("Ammo has been gained");
             RemainingAmmo += AmmoGained;
-
     }
 
     public void SetRemainingAmmo(int inAmmo)

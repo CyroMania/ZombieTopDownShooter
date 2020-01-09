@@ -24,7 +24,7 @@ public class WaveSystem : MonoBehaviour
 
 
     private int NextWave = 0;
-    public float timeBetweenWaves = 5f;
+    public float timeBetweenWaves = 4f;
     public float waveCountdown;
 
     private float searchCountdown = 1f;
