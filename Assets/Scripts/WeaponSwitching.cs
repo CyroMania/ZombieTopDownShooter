@@ -50,7 +50,7 @@ public class WeaponSwitching : MonoBehaviour
             }
             else
             {
-                Debug.Log("Yo ar reload");
+                Debug.Log("You are currently reloading!");
             }
         }
 

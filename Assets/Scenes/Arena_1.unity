@@ -3101,7 +3101,7 @@ MonoBehaviour:
   UnlimitedAmmo: 0
   RemainingAmmo: 12
   maxMagazineAmmo: 6
-  currentMagazineAmmo: 0
+  currentMagazineAmmo: 6
   ReloadTime: 4
   fireTime: 1
 --- !u!212 &1901648851

@@ -54,7 +54,7 @@ public class ZombieMovement : MonoBehaviour
                 }
 
 
-                if (!Anim.GetCurrentAnimatorStateInfo(0).IsName("Idle_Standin"))
+                if (!Anim.GetCurrentAnimatorStateInfo(0).IsName("Zombie_Walk"))
                 {
                     Anim.SetBool("hasSpawned", false);
                 }
@@ -76,7 +76,10 @@ public class ZombieMovement : MonoBehaviour
                         {
                             transform.position = Vector3.MoveTowards(new Vector3(ZombieX, ZombieY, -0.5f), player.position, speed * 0.01f);
                         }
-
+                    }
+                    else
+                    {
+                        Anim.SetBool("isIdle", true);
                     }
                 }
 
