@@ -304,7 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbae58508c7aa1d40b51b08d03ee003a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnRate: 0.5
+  SpawnRate: 0.1
   prefabToSpawn: {fileID: 6009152871189125171, guid: 449dc682e684c644db5507554022916b,
     type: 3}
   adjustmentAngle: 0
