@@ -55,25 +55,4 @@ public class PickUp : MonoBehaviour
         }
         isOscillating = false;
     }
-
-
-  //  private void OnDestroy()
-  //  {
-     //   if (gameObject.name.Contains("ShotgunBullet"))
-     //   {
-     //       try
-      //      {
-     //           var ShotgunWeaponScript = GameObject.Find("Shotgun").GetComponent("Weapon");
-     //           ShotgunWeaponScript.SendMessage("IncreaseRemainingAmmo", 6);
-     //           Debug.Log("Shotgun equipped, increased remaining ammo");
-     //       }
-     //       catch
-     //       {
-     //           var WeaponAmmuntionScript = GameObject.Find("Weapon").GetComponent("Weapon");
-     //           WeaponAmmuntionScript.SendMessage("IncreaseShotgunAmmo", 6);
-     //           Debug.Log("Shotgun not equipped, increased ammunition ammo");
-    //        }
-    //    }
-        //OnPickUp.Invoke();
-   //}
 }

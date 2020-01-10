@@ -7,7 +7,8 @@ public class ShotgunFacing : MonoBehaviour
     static Animator Anim;
     public Camera theCamera;
     public GameObject Parent;
-    private bool Firing;
+    private bool isFiring;
+    private bool isReloading;
     Vector3 MoveInfront;
     Vector3 MoveBehind;
 
@@ -36,7 +37,7 @@ public class ShotgunFacing : MonoBehaviour
 
 
 
-        Firing = Anim.GetBool("isFiring");
+        isFiring = Anim.GetBool("isFiring");
         Vector3 target = theCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector3 difference = target - transform.position;
         if (difference.x < difference.y && difference.y * -1 < difference.x)

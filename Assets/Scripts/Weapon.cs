@@ -11,18 +11,20 @@ public class Weapon : MonoBehaviour
     public AudioSource Reloading;
 
     public Image ReloadBar;
+    public Image MagazineAmmo;
 
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
     public GameObject Parent;
 
-    public int maxMagazineAmmo = 10;
-    public int RemainingAmmo = 30;
-    public int currentMagazineAmmo;
-    public float ReloadTime = 3f;
-
     public bool UnlimitedAmmo = false;
+    public int RemainingAmmo = 30;
+    public int maxMagazineAmmo = 10;
+    public int currentMagazineAmmo;
+
+    public float ReloadTime = 3f;
     public float fireTime = 0.3f;
+
     private bool isFiring = false;
     private bool isReloading = false;
     private bool canReload = true;
@@ -42,6 +44,7 @@ public class Weapon : MonoBehaviour
     {
         isFiring = true;
         currentMagazineAmmo--;
+        MagazineAmmo.SendMessage("SetMagazineAmmo", currentMagazineAmmo);
 
         Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
         if (GetComponent<AudioSource>() != null)
@@ -162,6 +165,11 @@ public class Weapon : MonoBehaviour
         }
         EndReload.Invoke();
         isReloading = false;
+        if (gameObject.name == "Shotgun")
+        {
+            Parent.SendMessage("SetShotgunAmmo", RemainingAmmo);
+        }
+        MagazineAmmo.SendMessage("SetMagazineAmmo", currentMagazineAmmo);
 
         yield break;
     }
@@ -170,18 +178,12 @@ public class Weapon : MonoBehaviour
 
     private void OnEnable()
     {
+        var ParentWeaponScript = Parent.GetComponent("Ammunition");
+        MagazineAmmo.SendMessage("SetCurrentWeapon", gameObject.name);
+        MagazineAmmo.SendMessage("SetMagazineAmmo", currentMagazineAmmo);
         if (gameObject.name == "Shotgun")
         {
-            var ParentWeaponScript = Parent.GetComponent("Ammunition");
             ParentWeaponScript.SendMessage("SendShotgunAmmo", gameObject);
-        }
-    }
-
-    private void OnDisable()
-    {
-        if (gameObject.name == "Shotgun")
-        {
-            Parent.SendMessage("SetShotgunAmmo", RemainingAmmo);
         }
     }
 
