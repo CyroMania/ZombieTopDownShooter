@@ -48,7 +48,7 @@ public class ZombieMovement : MonoBehaviour
                 TargetY = player.transform.position.y;
                 ZombieY = gameObject.transform.position.y;
 
-                if ((difference.x > .8 || difference.y > .8 || difference.x < -.8 || difference.y < -.8) && (isTouching = true))
+                if ((difference.x > .6 || difference.y > .6 || difference.x < -.6 || difference.y < -.6) && (isTouching = true))
                 {
                     isTouching = false;
                 }
@@ -76,10 +76,6 @@ public class ZombieMovement : MonoBehaviour
                         {
                             transform.position = Vector3.MoveTowards(new Vector3(ZombieX, ZombieY, -0.5f), player.position, speed * 0.01f);
                         }
-                    }
-                    else
-                    {
-                        Anim.SetBool("isIdle", true);
                     }
                 }
 

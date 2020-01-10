@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 public class HurtTrigger : MonoBehaviour
 {
     public int damage;
@@ -7,11 +8,13 @@ public class HurtTrigger : MonoBehaviour
     {
         collision.transform.SendMessage("TakeDamage", damage, SendMessageOptions.DontRequireReceiver);
         GetComponent<Collider2D>().enabled = false;
-        Invoke("ResetTrigger", resetTime);
+        StartCoroutine(ResetTrigger(resetTime));
         gameObject.SendMessageUpwards("InContact", true);
     }
-    private void ResetTrigger()
+    IEnumerator ResetTrigger(float inResetTime)
     {
+        yield return new WaitForSeconds(inResetTime);
+        Debug.Log("Reset");
         GetComponent<Collider2D>().enabled = true;
     }
 }
