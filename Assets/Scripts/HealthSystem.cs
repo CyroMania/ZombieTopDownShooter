@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class OnDamagedEvent : UnityEvent<int> { }
 public class HealthSystem : MonoBehaviour
 {
+    public int lives = 1;
     public int health = 100;
     public UnityEvent onDie;
     public OnDamagedEvent onDamaged;
@@ -22,17 +23,27 @@ public class HealthSystem : MonoBehaviour
         {
             PlayerPrefs.SetInt("PlayerHealth", health);
         }
+
         onDamaged.Invoke(health);
 
         if (health < 1)
         {
-            onDie.Invoke();
+            lives--;
+            if (lives < 1)
+            {
+                GameOver();
+            }
         }
     }
 
     public void GameOver()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void GainLife()
+    {
+        lives++;
     }
 }
 

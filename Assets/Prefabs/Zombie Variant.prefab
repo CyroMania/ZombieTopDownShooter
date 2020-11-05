@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 7121118765159555022}
   - component: {fileID: 7121118765159555023}
   - component: {fileID: 7121118766678539069}
+  - component: {fileID: -6975797625100668251}
   m_Layer: 9
   m_Name: Zombie Variant
   m_TagString: Enemy
@@ -192,6 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9a37331f707b240bfe7e4f181d911e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lives: 1
   health: 5
   onDie:
     m_PersistentCalls:
@@ -306,6 +308,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnRate: 0.1
   prefabToSpawn: {fileID: 6009152871189125171, guid: 449dc682e684c644db5507554022916b,
+    type: 3}
+  adjustmentAngle: 0
+--- !u!114 &-6975797625100668251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7121118765159555020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbae58508c7aa1d40b51b08d03ee003a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnRate: 0.001
+  prefabToSpawn: {fileID: 5142618106464523285, guid: 424fc4bfe130dab47853d2813e26d1fa,
     type: 3}
   adjustmentAngle: 0
 --- !u!1 &7121118765457370911

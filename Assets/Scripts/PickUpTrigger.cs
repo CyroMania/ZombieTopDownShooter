@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class PickUpTrigger : MonoBehaviour
 {
+    public GameObject Player; 
     public GameObject Weapon;
     public UnityEvent ShotgunAmmoPickUp;
     private void Start()
@@ -17,6 +18,10 @@ public class PickUpTrigger : MonoBehaviour
         if (collision.gameObject.name.Contains("ShotgunBullet"))
         {
             ShotgunAmmo();
+        }
+        else if (collision.gameObject.name.Contains("ExtraLife"))
+        {
+            Player.SendMessage("GainExtraLife");
         }
         Destroy(collision.gameObject);
 
